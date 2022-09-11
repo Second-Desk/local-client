@@ -1,12 +1,17 @@
-* {
-  font-family: "Comfortaa";
-  font-size: 22px;
-  font-weight: 400;
-  line-height: 30px;
+:root {
+  --bg-light: #373737;
+  --bg-dark: #232831;
+  --clickable: #00b7f1;
+  --focused: #f47825;
 }
 
 body {
-  background-color: wheat;
+  background-color: #333333;
+  font-family: "Comfortaa";
+  font-size: 1.2rem;
+  font-weight: 400;
+  line-height: 30px;
+  color: white;
 }
 
 #connectionId {
@@ -19,6 +24,10 @@ body {
   justify-content: center;
   align-items: center;
   text-align: center;
+}
+
+#connectionContainer {
+  margin-bottom: 25vh;
 }
 
 .remote-video-container {
@@ -63,14 +72,8 @@ body {
   justify-content: center;
 }
 
-#screenShareBtn {
-  padding: 4px 10px 3px 10px;
-  border-radius: 5px;
-  background-color: #cc343b;
-}
-
 #hideVideo img {
-  margin-top: 10px;
+  margin-top: 2px;
   max-width: 60px;
   opacity: 70%;
 }
@@ -96,68 +99,32 @@ button {
   padding: 10px 20px 10px 20px;
   color: white;
   cursor: pointer;
-  font-size: 0.5rem;
+  font-size: 0.8rem;
 }
 
 #copyShareLinkBtn {
-  width: 350px;
-  height: 350px;
-  animation: beat 2s ease-in-out 0.3s infinite backwards;
-}
-
-#copyShareLinkBtn p {
-  font-weight: bolder;
+  border: var(--clickable) solid 2px;
+  font-weight: 400;
   position: relative;
-  top: 100px;
-  z-index: 100;
   cursor: pointer;
   font-size: 1rem;
-  margin-top: -20px;
+  margin-top: 2vh;
 }
 
 @keyframes beat {
   0% {
-    transform: scale(0.82);
+    transform: scale(0.84);
   }
   50% {
     transform: scale(0.88);
   }
   100% {
-    transform: scale(0.82);
+    transform: scale(0.84);
   }
 }
 
-.heart-shape {
-  margin-left: auto;
-  margin-right: auto;
-  cursor: pointer;
-  position: relative;
-  width: 150px;
-  height: 150px;
-  -webkit-transform: rotate(45deg);
-  -moz-transform: rotate(45deg);
-  -ms-transform: rotate(45deg);
-  -o-transform: rotate(45deg);
-  transform: rotate(45deg);
-  background: #f47174;
-}
-.heart-shape:before,
-.heart-shape:after {
-  position: absolute;
-  width: 150px;
-  height: 150px;
-  content: "";
-  -webkit-border-radius: 50%;
-  -moz-border-radius: 50%;
-  -o-border-radius: 50%;
-  border-radius: 50%;
-  background: #f47174;
-}
-.heart-shape:before {
-  bottom: 0px;
-  left: -80px;
-}
-.heart-shape:after {
-  top: -80px;
-  right: 0px;
+#screenShareBtn {
+  padding: 10px 14px 10px 14px;
+  border-radius: 5px;
+  background-color: #cc343b;
 }

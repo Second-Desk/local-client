@@ -1,21 +1,10 @@
-<!-- TO DO 
-=============
-* make video modal sit next to full screen video
-* drag and resize video (look at https://interactjs.io/)
-* MAKE IT WORK ON MOBILE
-* feature to share computer audio / play music
-* sexy in-game dice
-* add messaging
-* add drawing tools?
--->
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Seduce Me</title>
+    <title>Local Client</title>
     <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
     <link
       href="https://fonts.googleapis.com/css?family=Comfortaa"
@@ -34,16 +23,16 @@
 
   <body>
     <div class="main-container">
-      <h4>
-        Connection ID: <br /><span id="connectionId">being retrieved...</span>
-      </h4>
+      <div id="connectionContainer">
+        <h4>
+          Connection ID: <br /><span id="connectionId">being retrieved...</span>
+        </h4>
 
-      <button id="copyShareLinkBtn">
-        <p id="copyShareLinkBtnText">Copy Share Link<br /><br /></p>
-        <div class="heart-shape"></div>
-      </button>
-      <br />
-      <br />
+        <button id="copyShareLinkBtn">Copy Share Link</button>
+        <p id="copyShareLinkBtnText"></p>
+        <br />
+        <br />
+      </div>
       <div class="remote-video-container" id="remoteVideoContainer">
         <video src="" id="remoteVideo" width="800px" autoplay></video>
       </div>
@@ -130,7 +119,7 @@
 
     copyShareLinkBtn.addEventListener("click", function () {
       copyToClipboard(url);
-      copyShareLinkBtnText.innerHTML = "Copy Share Link <br /> (Link copied!)";
+      copyShareLinkBtnText.innerHTML = "Link copied!";
     }); // callback function
 
     // Start call when button is pressed
@@ -240,8 +229,8 @@
         .then(function (stream) {
           var call = peer.call(remoteId, stream);
           call.on("stream", function (remoteStream) {
-            document.getElementById("connectionId").style.display = "none";
-            copyShareLinkBtn.style.display = "none";
+            document.getElementById("connectionContainer").style.display =
+              "none";
             remoteVideoContainer.style.display = "block";
             localVideoContainer.classList.add("video-modal");
             remoteVideo.srcObject = remoteStream;
@@ -259,8 +248,7 @@
       navigator.mediaDevices
         .getUserMedia({ video: true, audio: true })
         .then(function (stream) {
-          document.getElementById("connectionId").style.display = "none";
-          copyShareLinkBtn.style.display = "none";
+          document.getElementById("connectionContainer").style.display = "none";
           remoteVideoContainer.style.display = "block";
           localVideoContainer.classList.add("video-modal");
           call.answer(stream); // Answer the call with an A/V stream.
