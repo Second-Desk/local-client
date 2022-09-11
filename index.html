@@ -28,8 +28,9 @@
           Connection ID: <br /><span id="connectionId">being retrieved...</span>
         </h4>
 
-        <button id="copyShareLinkBtn">Copy Share Link</button>
-        <p id="copyShareLinkBtnText"></p>
+        <button id="copyShareLinkBtn">
+          <p id="copyShareLinkBtnText">Copy Link</p>
+        </button>
         <br />
         <br />
       </div>
@@ -119,7 +120,7 @@
 
     copyShareLinkBtn.addEventListener("click", function () {
       copyToClipboard(url);
-      copyShareLinkBtnText.innerHTML = "Link copied!";
+      copyShareLinkBtnText.innerHTML = "Link Copied!";
     }); // callback function
 
     // Start call when button is pressed
