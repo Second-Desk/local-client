@@ -27,7 +27,10 @@ body {
 }
 
 #connectionContainer {
-  margin-bottom: 25vh;
+  margin-bottom: 15vh;
+  margin-top: 5vh;
+  background-color: var(--bg-dark);
+  padding: 20px;
 }
 
 .remote-video-container {
