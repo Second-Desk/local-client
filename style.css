@@ -85,7 +85,7 @@ h6 {
 
 body {
   background-color: #333333;
-  font-family: "Comfortaa";
+  font-family: "Poppins", sans-serif;
   font-size: 1.2rem;
   font-weight: 400;
   line-height: 30px;
@@ -93,25 +93,32 @@ body {
 }
 
 #connectionId {
-  font-weight: bold;
+  font-weight: 400;
 }
 
 .main-container {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   text-align: center;
+  height: 100vh;
+  max-width: 80vw;
+  padding: 10px;
+}
+
+.main-container > div {
+  margin: 20px;
 }
 
 #connectionContainer {
-  margin-bottom: 15vh;
-  margin-top: 5vh;
   width: 60vw;
   max-width: 500px;
   background-color: var(--bg-dark);
-  padding: 10px 20px;
+  padding: 20px 20px;
   border-bottom: var(--bg-extra-dark) 30px solid;
+  height: 300px;
 }
 
 .remote-video-container {
@@ -193,11 +200,16 @@ button {
 
 #copyShareLinkBtn {
   border: var(--clickable) solid 2px;
-  font-weight: 400;
-  position: relative;
   cursor: pointer;
-  font-size: 1rem;
-  margin-top: 2vh;
+  margin-top: auto;
+  transition: background-color 0.15s ease-out;
+  background-color: #ffffff00;
+  margin-top: 25%;
+  min-width: 40%;
+}
+
+#copyShareLinkBtn:hover {
+  background-color: #ffffff10;
 }
 
 @keyframes beat {
