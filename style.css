@@ -1,6 +1,7 @@
 :root {
   --bg-light: #373737;
   --bg-dark: #232831;
+  --bg-extra-dark: #1a1d24;
   --clickable: #00b7f1;
   --focused: #f47825;
 }
@@ -29,8 +30,11 @@ body {
 #connectionContainer {
   margin-bottom: 15vh;
   margin-top: 5vh;
+  width: 60vw;
+  max-width: 500px;
   background-color: var(--bg-dark);
-  padding: 20px;
+  padding: 10px 20px;
+  border-bottom: var(--bg-extra-dark) 30px solid;
 }
 
 .remote-video-container {
