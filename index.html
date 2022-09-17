@@ -50,10 +50,6 @@
     var remoteVideo = document.getElementById("remoteVideo");
     var remoteVideoContainer = document.getElementById("remoteVideoContainer");
     remoteVideoContainer.style.display = "none";
-    var shareLink = document.getElementById("shareLink");
-    var copyShareLinkBtn = document.getElementById("copyShareLinkBtn");
-    copyShareLinkBtn.disabled = true;
-    var copyShareLinkBtnText = document.getElementById("copyShareLinkBtnText");
     var url = new URL(document.location);
     var queryId;
     var hasQueryId = false;
@@ -76,45 +72,19 @@
       return localId;
     });
 
-    const createShareableLink = (localId) => {
-      url.searchParams.append("id", localId);
-      copyShareLinkBtn.disabled = false;
-    };
-
     const startByQuery = () => {
       remoteId = queryId;
       openConnection();
     };
 
     // Start call when button is pressed
-    const startCall = async () => {
-      console.log("Remote ID is: " + remoteIdInput.value);
-      remoteId = remoteIdInput.value;
-      openConnection();
-    };
-
-    async function screenShare(displayMediaOptions) {
-      try {
-        let screenShareStream = await navigator.mediaDevices.getDisplayMedia(
-          displayMediaOptions
-        );
-        localVideo.srcObject = screenShareStream;
-        localVideo.classList.add("flip-horizontal");
-
-        // replace the other person's stream with your screen share
-        peerCall.peerConnection
-          .getSenders()[1]
-          .replaceTrack(screenShareStream.getVideoTracks()[0]);
-
-        peerCall.peerConnection
-          .getSenders()[0]
-          .replaceTrack(screenShareStream.getAudioTracks()[0]);
-
-        console.log("Screen share started!");
-      } catch (err) {
-        console.log("Screenshare error: " + err);
-      }
-    }
+    startCallBtn.addEventListener("click", function () {
+      const startCall = async () => {
+        console.log("Remote ID is: " + remoteIdInput.value);
+        remoteId = remoteIdInput.value;
+        openConnection();
+      };
+    });
 
     // Open a new data connection
     const openConnection = () => {
