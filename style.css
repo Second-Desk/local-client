@@ -113,8 +113,9 @@ body {
   max-width: 500px;
   background-color: var(--bg-dark);
   padding: 20px 20px;
+  padding-top: 50px;
   border-bottom: var(--bg-extra-dark) 30px solid;
-  height: 300px;
+  height: 350px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -140,6 +141,12 @@ body {
   height: 100%;
 }
 
+#remoteIdInput {
+  margin-top: 5%;
+  padding: 10px 20px;
+  max-width: 200px;
+}
+
 .flip-horizontal {
   transform: scale(1, 1) !important; /* reverse video flip */
 }
@@ -150,17 +157,18 @@ button {
   padding: 10px 20px 10px 20px;
   color: white;
   cursor: pointer;
-  font-size: 0.8rem;
+  font-size: 1rem;
 }
 
-#copyShareLinkBtn {
+#startCallBtn {
   border: var(--clickable) solid 2px;
   cursor: pointer;
   margin-top: auto;
   transition: background-color 0.15s ease-out;
   background-color: #ffffff00;
-  margin-top: 10%;
-  min-width: 40%;
+  margin-top: auto;
+  min-width: 35%;
+  margin-left: auto;
 }
 
 #copyShareLinkBtn:hover {
