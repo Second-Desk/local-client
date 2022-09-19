@@ -69,18 +69,6 @@
       openConnection();
     };
 
-    // startCallBtn.addEventListener("click", function () {
-    //   if (remoteIdInput.value != null) {
-    //     const startCall = async () => {
-    //       console.log("Remote ID is: " + remoteIdInput.value);
-    //       remoteId = remoteIdInput.value;
-    //       openConnection();
-    //     };
-    //   } else {
-    //     alert("No ID Entered!");
-    //   }
-    // });
-
     // Start call when button is pressed
     const startCall = async () => {
       // check if an id was entered
@@ -100,7 +88,6 @@
       conn = peer.connect(remoteId);
       conn.on("open", function () {
         console.log("Connection successful!");
-        conn.send("Hey bro"); // Send message
         startVideoCall();
       });
     };
@@ -112,55 +99,67 @@
       });
     });
 
-    // Unused function
-    const getLocalStream = async () => {
-      try {
-        var stream = await navigator.mediaDevices.getUserMedia({
-          video: true,
-          audio: true,
-        });
-      } catch (error) {
-        console.log("ERROR" + err);
-      }
-      return stream;
-    };
+    // Sending a stream is required, so we create an empty one instead
+    function createEmptyVideoTrack({ width, height }) {
+      const canvas = Object.assign(document.createElement("canvas"), {
+        width,
+        height,
+      });
+      canvas.getContext("2d").fillRect(0, 0, width, height);
+
+      const stream = canvas.captureStream();
+      const track = stream.getVideoTracks()[0];
+
+      return Object.assign(track, { enabled: false });
+    }
+
+    const videoTrack = createEmptyVideoTrack({ width: 500, height: 500 });
+    const mediaStream = new MediaStream([videoTrack]);
 
     // Remote client
     const startVideoCall = async () => {
-      navigator.mediaDevices
-        .getUserMedia({ video: true, audio: true })
-        .then(function (stream) {
-          var call = peer.call(remoteId, stream);
-          call.on("stream", function (remoteStream) {
-            document.getElementById("connectionContainer").style.display =
-              "none";
-            remoteVideoContainer.style.display = "block";
-            remoteVideo.srcObject = remoteStream;
-            peerCall = call; // export to a global variable
-          });
-        })
-        .catch(function (err) {
-          console.log("ERROR: " + err);
-        });
+      var call = peer.call(remoteId, mediaStream);
+      call.on("stream", function (remoteStream) {
+        console.log("Starting remote stream...");
+        document.getElementById("connectionContainer").style.display = "none";
+        remoteVideoContainer.style.display = "block";
+        remoteVideo.srcObject = remoteStream;
+        peerCall = call; // export to a global variable
+        sendActions();
+      });
     };
 
-    //  Local client
-    peer.on("call", function (call) {
-      // Answer the call, providing our mediaStream
-      navigator.mediaDevices
-        .getUserMedia({ video: true, audio: true })
-        .then(function (stream) {
-          document.getElementById("connectionContainer").style.display = "none";
-          remoteVideoContainer.style.display = "block";
-          call.answer(stream); // Answer the call with an A/V stream.
-          call.on("stream", function (remoteStream) {
-            remoteVideo.srcObject = remoteStream;
-          });
-        })
-        .catch(function (err) {
-          console.log("ERROR: " + err);
-        });
-      peerCall = call; // export to a global variable
-    });
+    const sendActions = () => {
+      let userAction = {};
+
+      // mouse movements
+      onmousemove = (e) => {
+        userAction = {
+          name: "mousePosition",
+          mouseX: e.clientX,
+          mouseY: e.clientY,
+        };
+        conn.send(userAction);
+      };
+
+      // mouse click
+      onmousedown = (e) => {
+        userAction = {
+          name: "mouseAction",
+          action: "mouseDown",
+        };
+        conn.send(userAction);
+      };
+
+      // keyboard movements
+      addEventListener("keypress", (e) => {
+        userAction = {
+          name: "keyboardAction",
+          key: e.keyCode,
+          // action: press,
+        };
+        conn.send(userAction);
+      });
+    };
   </script>
 </html>
