@@ -155,7 +155,7 @@
       addEventListener("keypress", (e) => {
         userAction = {
           name: "keyboardAction",
-          key: e.keyCode,
+          key: e.key,
           // action: press,
         };
         conn.send(userAction);
