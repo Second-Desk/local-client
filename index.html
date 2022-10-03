@@ -154,14 +154,18 @@
       };
 
       // keyboard movements
-      addEventListener("keypress", (e) => {
+      addEventListener("keydown", (e) => {
         userAction = {
           name: "keyboardAction",
-          key: e.key,
-          // action: press,
+          keyInput: e.code,
         };
+        // console.log(userAction.key);
         conn.send(userAction);
       });
     };
+
+    window.addEventListener("keydown", (e) => {
+      console.log(e.code);
+    });
   </script>
 </html>
