@@ -153,6 +153,14 @@
         conn.send(userAction);
       };
 
+      onmouseup = (e) => {
+        userAction = {
+          name: "mouseAction",
+          action: "mouseUp",
+        };
+        conn.send(userAction);
+      };
+
       // keyboard movements
       addEventListener("keydown", (e) => {
         userAction = {
