@@ -127,6 +127,13 @@
         remoteVideoContainer.style.display = "block";
         remoteVideo.srcObject = remoteStream;
         peerCall = call; // export to a global variable
+        let screenSize = {
+          name: "screenSize",
+          width: remoteVideoContainer.offsetHeight, // get height of video
+          height: remoteVideoContainer.offsetWidth, // get width of video
+        };
+        console.log(screenSize);
+        conn.send(screenSize);
         sendActions();
       });
     };
