@@ -127,13 +127,6 @@
         remoteVideoContainer.style.display = "block";
         remoteVideo.srcObject = remoteStream;
         peerCall = call; // export to a global variable
-        let screenSize = {
-          name: "screenSize",
-          width: remoteVideoContainer.offsetHeight, // get height of video
-          height: remoteVideoContainer.offsetWidth, // get width of video
-        };
-        console.log(screenSize);
-        conn.send(screenSize);
         sendActions();
       });
     };
@@ -143,10 +136,13 @@
 
       // mouse movements
       onmousemove = (e) => {
+        let rect = remoteVideo.getBoundingClientRect();
         userAction = {
           name: "mousePosition",
-          mouseX: e.clientX,
-          mouseY: e.clientY,
+          mouseX: e.clientX - rect.left,
+          mouseY: e.clientY - rect.top,
+          width: remoteVideo.offsetWidth, // get width of video
+          height: remoteVideo.offsetHeight, // get height of video
         };
         conn.send(userAction);
       };
