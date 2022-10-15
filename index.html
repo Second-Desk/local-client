@@ -139,6 +139,7 @@
       call.on("stream", function (remoteStream) {
         console.log("Starting remote stream...");
         document.getElementById("connectionContainer").style.display = "none";
+        remoteVideo.classList.add("hide-cursor"); // add css class to hide cursor
         remoteVideoContainer.style.display = "block";
         remoteVideo.srcObject = remoteStream;
         peerCall = call; // export to a global variable

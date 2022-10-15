@@ -92,6 +92,11 @@ body {
   color: white;
 }
 
+/* hide cursor */
+.hide-cursor {
+  cursor: none;
+}
+
 .main-container {
   display: flex;
   flex-direction: row;
