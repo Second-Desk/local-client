@@ -131,6 +131,11 @@
       });
     };
 
+    peer.on("close", function () {
+      alert("Connection Closed :(");
+      peer.destroy();
+    });
+
     const sendActions = () => {
       let userAction = {};
 
