@@ -50,6 +50,7 @@
     var startCallBtn = document.getElementById("startCallBtn");
     var remoteIdInput = document.getElementById("remoteIdInput");
 
+    // unused currently
     let nIntervId;
     function startConnectionStateCheck() {
       // check if an interval has already been set up
@@ -91,7 +92,7 @@
         console.log("Remote ID is: " + remoteIdInput.value);
         remoteId = remoteIdInput.value;
         openConnection();
-        startConnectionStateCheck();
+        // startConnectionStateCheck();
       } else {
         alert("No ID Entered!");
       }
