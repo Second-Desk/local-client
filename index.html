@@ -36,7 +36,7 @@
   </body>
   <script type="module">
     var peer = new Peer(null, {
-      debug: 2,
+      debug: 3,
     });
     var remoteId = "";
     var conn = null;
@@ -49,6 +49,19 @@
     var hasQueryId = false;
     var startCallBtn = document.getElementById("startCallBtn");
     var remoteIdInput = document.getElementById("remoteIdInput");
+
+    let nIntervId;
+    function startConnectionStateCheck() {
+      // check if an interval has already been set up
+      if (!nIntervId) {
+        nIntervId = setInterval(checkConnectionState, 1000);
+      }
+    }
+
+    function checkConnectionState() {
+      const connectionState = peer.connectionState;
+      console.log(connectionState);
+    }
 
     // Parse url for a potential ID
     let params = new URL(document.location).searchParams;
@@ -78,6 +91,7 @@
         console.log("Remote ID is: " + remoteIdInput.value);
         remoteId = remoteIdInput.value;
         openConnection();
+        startConnectionStateCheck();
       } else {
         alert("No ID Entered!");
       }
@@ -131,11 +145,6 @@
       });
     };
 
-    peer.on("close", function () {
-      alert("Connection Closed :(");
-      peer.destroy();
-    });
-
     const sendActions = () => {
       let userAction = {};
 
@@ -175,7 +184,6 @@
           name: "keyboardAction",
           keyInput: e.code,
         };
-        // console.log(userAction.key);
         conn.send(userAction);
       });
     };
