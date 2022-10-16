@@ -190,3 +190,45 @@ button {
 #startCallBtn:hover #startCallBtn__caret {
   transform: translate(5px, -1px);
 }
+
+#feedback-btn {
+  position: absolute;
+  bottom: 80px;
+  right: 50px;
+  background: none;
+  text-decoration: none;
+  border: none;
+  padding: 10px;
+  color: white;
+  cursor: pointer;
+  font-size: 1rem;
+  border-radius: 1000px;
+  cursor: pointer;
+  transition: all 0.15s ease-out;
+  background-color: var(--clickable);
+  height: 50px;
+  width: 50px;
+  box-shadow: 5px 11px 19px rgba(0, 0, 0, 0.3);
+  border: solid #bdbdbd00 1.2px;
+}
+
+#feedback-btn::after {
+  content: "Feedback";
+  position: absolute;
+  top: 60px;
+  left: -22px;
+  background-color: #1a1d2450;
+  padding: 3px 10px;
+  border-radius: 5px;
+  font-weight: 400;
+}
+
+#feedback-btn:hover {
+  border: solid #bdbdbd 1.2px;
+  transform: translateY(-4px);
+  box-shadow: 5px 11px 19px rgba(0, 0, 0, 0.1);
+}
+
+#feedback-btn__icon {
+  width: 32px;
+}
