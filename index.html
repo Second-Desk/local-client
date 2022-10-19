@@ -92,6 +92,8 @@
     // Initialize peer
     peer.on("open", function (localId) {
       console.log("Local ID is: " + localId);
+      // start call using a query, if an id is found in the url
+      if (hasQueryId) startByQuery();
       return localId;
     });
 
