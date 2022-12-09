@@ -198,17 +198,28 @@
       };
 
       // keyboard movements
-      addEventListener("keydown", (e) => {
+      let key_list = {};
+      let modifier_list = {};
+      onkeydown = onkeyup = function (e) {
+        console.log(e.code);
+        e = e || event; // to deal with IE
+        let keyInput = e.code;
+
+        // check if input is a regular key
+        if (keyInput.includes("Key")) {
+          keyInput = keyInput.replace("Key", "");
+          key_list[keyInput] = e.type == "keydown";
+        } else {
+          modifier_list[keyInput] = e.type == "keydown";
+        }
         userAction = {
           name: "keyboardAction",
-          keyInput: e.code,
+          keyInput: key_list,
+          modifierInput: modifier_list,
         };
         conn.send(userAction);
-      });
+        console.log(JSON.stringify(modifier_list) + JSON.stringify(key_list));
+      };
     };
-
-    window.addEventListener("keydown", (e) => {
-      console.log(e.code);
-    });
   </script>
 </html>
