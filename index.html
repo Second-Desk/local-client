@@ -119,18 +119,25 @@
 
     // Open a new data connection
     const openConnection = () => {
+      console.log("Attempting to connect to remote ID: " + remoteId);
       conn = peer.connect(remoteId);
       conn.on("open", function () {
         console.log("Connection successful!");
         startVideoCall();
       });
+
+      conn.on("error", function (err) {
+        console.log("Connection error: ", err);
+      });
+
+      conn.on("close", function () {
+        console.log("Connection closed");
+      });
     };
 
-    // Receive messages
-    peer.on("connection", function (conn) {
-      conn.on("data", function (data) {
-        console.log(data);
-      });
+    // Error logging for peer
+    peer.on("error", function (err) {
+      console.log("Peer error: ", err);
     });
 
     // Sending a stream is required, so we create an empty one instead
